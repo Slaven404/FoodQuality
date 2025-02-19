@@ -1,0 +1,6 @@
+@QualityManager_HostAddress = http://localhost:5064
+
+GET {{QualityManager_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

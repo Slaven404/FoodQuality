@@ -1,0 +1,65 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio cache
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+*.pdb
+
+# Logs, databases, and debug info
+*.log
+*.tlog
+*.sqlite
+*.mdf
+*.ldf
+*.csv
+*.psess
+*.vsp
+
+# .NET Core and .NET Standard artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider and JetBrains IDEs
+.idea/
+*.sln.iml
+
+# NuGet Packages
+*.nupkg
+packages/
+# Avoid ignoring NuGet packages directory if it's checked in
+!packages/build/
+!packages/repositories.config
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS system files
+.DS_Store
+
+# Local user settings
+*.vscode/
+*.code-workspace
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+*.dotCover
+
+# Coverage results
+coverage/
+*.coverage
+*.coveragexml
+*.cov
+
+# Deployment
+publish/
