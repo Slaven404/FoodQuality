@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using QualityManager.Data;
+using QualityManager.Mappings;
+using QualityManager.Repository;
+using QualityManager.Resources;
+using QualityManager.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,10 +12,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddDataAnnotationsLocalization(opt =>
+    {
+        opt.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ValidationMessages));
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddLocalization();
+builder.Services.AddAutoMapper(typeof(FoodAnalysisProfile));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IFoodAnalysisRepository, FoodAnalysisRepository>();
+builder.Services.AddScoped<IFoodAnalysisService, FoodAnalysisService>();
 
 builder.Logging.AddConsole();
 
