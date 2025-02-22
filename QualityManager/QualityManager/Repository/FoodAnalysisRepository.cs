@@ -12,7 +12,7 @@ namespace QualityManager.Repository
 
         public async Task<FoodAnalysis?> FindBySerialNumberAsync(string serialNumber)
         {
-            return await _dbSet.FirstOrDefaultAsync(x => x.SerialNumber == serialNumber);
+            return await _dbSet.Include(x => x.AnalysisType).Include(x => x.ProcessStatus).FirstOrDefaultAsync(x => x.SerialNumber == serialNumber);
         }
 
         public async Task<FoodAnalysis?> GetDetailsByIdAsync(long id)

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QualityManager.Data;
 
@@ -10,9 +11,11 @@ using QualityManager.Data;
 namespace QualityManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250221193217_FoodAnalysis_Result")]
+    partial class FoodAnalysis_Result
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,53 +129,6 @@ namespace QualityManager.Migrations
                     b.ToTable("FoodAnalyses");
                 });
 
-            modelBuilder.Entity("QualityManager.Models.Treshold", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("AnalysisTypeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("High")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Low")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnalysisTypeId");
-
-                    b.ToTable("Tresholds");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AnalysisTypeId = 1L,
-                            High = 77777777L,
-                            Low = 22222222L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            AnalysisTypeId = 2L,
-                            High = 7777777L,
-                            Low = 2222222L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            AnalysisTypeId = 3L,
-                            High = 777777L,
-                            Low = 222222L
-                        });
-                });
-
             modelBuilder.Entity("QualityManager.Models.FoodAnalysis", b =>
                 {
                     b.HasOne("QualityManager.Models.Codes.AnalysisType", "AnalysisType")
@@ -190,17 +146,6 @@ namespace QualityManager.Migrations
                     b.Navigation("AnalysisType");
 
                     b.Navigation("ProcessStatus");
-                });
-
-            modelBuilder.Entity("QualityManager.Models.Treshold", b =>
-                {
-                    b.HasOne("QualityManager.Models.Codes.AnalysisType", "AnalysisType")
-                        .WithMany()
-                        .HasForeignKey("AnalysisTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("AnalysisType");
                 });
 #pragma warning restore 612, 618
         }

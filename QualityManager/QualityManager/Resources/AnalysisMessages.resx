@@ -117,22 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnalysisTypeMaxValue" xml:space="preserve">
-    <value>Analysis Type ID must be a valid positive number.</value>
+  <data name="Chemical_inrange" xml:space="preserve">
+    <value>Chemical components are within acceptable limits.</value>
   </data>
-  <data name="AnalysisTypeRequired" xml:space="preserve">
-    <value>Analysis Type is required.</value>
+  <data name="Chemical_outrange" xml:space="preserve">
+    <value>Chemical components are out of acceptable range.</value>
   </data>
-  <data name="FoodNameRequired" xml:space="preserve">
-    <value>Food name is required.</value>
+  <data name="Completed" xml:space="preserve">
+    <value>Processing complete:</value>
   </data>
-  <data name="NotFound" xml:space="preserve">
-    <value>Entity {0} with key {1} not found.</value>
+  <data name="Microbiological_inrange" xml:space="preserve">
+    <value>Microorganisms are within limits.</value>
   </data>
-  <data name="SerialNumberRequired" xml:space="preserve">
-    <value>Serial number is required.</value>
+  <data name="Microbiological_outrange" xml:space="preserve">
+    <value>Microorganisms are beyond acceptable limits.</value>
   </data>
-  <data name="SerialNumberTooLong" xml:space="preserve">
-    <value>Serial number cannot exceed 32 characters.</value>
+  <data name="Peding" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="Sensory_inrange" xml:space="preserve">
+    <value>Sensory properties meet the required standards.</value>
+  </data>
+  <data name="Sensory_outrange" xml:space="preserve">
+    <value>Sensory properties do not meet the required standards.</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown status</value>
   </data>
 </root>

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace QualityManager.DTOs.Requests
 {
-    public class FoodAnalysisRequest
+    public class FoodBatchRequest
     {
         [Required(ErrorMessage = nameof(ValidationMessages.FoodNameRequired))]
         public string FoodName { get; set; } = string.Empty;

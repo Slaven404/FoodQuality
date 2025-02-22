@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QualityManager.DTOs.Requests;
 using QualityManager.DTOs.Responses;
-using QualityManager.Models;
 using QualityManager.Services;
 
 namespace QualityManager.Controllers
@@ -15,16 +14,23 @@ namespace QualityManager.Controllers
             _foodAnalysisService = foodAnalysisService;
         }
 
-        [HttpPost("/process")]
-        public async Task<IActionResult> ProcessFood(FoodAnalysisRequest request)
+        [HttpPost("process")]
+        public async Task<IActionResult> ProcessFood(FoodBatchRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            FoodAnalysisResponse? result = await _foodAnalysisService.CreateFoodAnalysisAsync(request);
+            FoodBatchDetailsResponse? result = await _foodAnalysisService.CreateFoodAnalysisAsync(request);
 
+            return Ok(result);
+        }
+
+        [HttpGet("status/{serial_number}")]
+        public async Task<IActionResult> GetProcessStatus(string serial_number)
+        {
+            FoodProcessStatusDetailsResponse? result = await _foodAnalysisService.GetFoodAnalysisBySerialNumberAsync(serial_number);
             return Ok(result);
         }
     }

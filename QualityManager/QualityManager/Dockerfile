@@ -1,25 +1,28 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
+﻿# Use the official ASP.NET Core runtime as a parent image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 80
 
+# Use the SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["QualityManager/QualityManager.csproj", "QualityManager/"]
-RUN dotnet restore "./QualityManager/QualityManager.csproj"
-COPY . .
+COPY ["Shared/Shared.csproj", "Shared/"]
+
+RUN dotnet restore "QualityManager/QualityManager.csproj"
+
+COPY QualityManager/ QualityManager/
+COPY Shared/ Shared/
+
 WORKDIR "/src/QualityManager"
-RUN dotnet build "./QualityManager.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "QualityManager.csproj" -c Release -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./QualityManager.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "QualityManager.csproj" -c Release -o /app/publish
 
+# Copy the build output to the runtime image
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "QualityManager.dll"]
+

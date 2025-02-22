@@ -9,11 +9,15 @@ namespace QualityManager.Mappings
     {
         public FoodAnalysisProfile()
         {
-            CreateMap<FoodAnalysisRequest, FoodAnalysis>();
+            CreateMap<FoodBatchRequest, FoodAnalysis>();
 
-            CreateMap<FoodAnalysis, FoodAnalysisResponse>()
+            CreateMap<FoodAnalysis, FoodBatchDetailsResponse>()
                 .ForMember(dest => dest.AnalysisType, opt => opt.MapFrom(src => src.AnalysisType.Name))
                 .ForMember(dest => dest.ProcessStatus, opt => opt.MapFrom(src => src.ProcessStatus.Name));
+
+            CreateMap<FoodAnalysis, FoodProcessStatusDetailsResponse>()
+              .ForMember(dest => dest.AnalysisType, opt => opt.MapFrom(src => src.AnalysisType.Name))
+              .ForMember(dest => dest.ProcessStatus, opt => opt.MapFrom(src => src.ProcessStatus.Name));
         }
     }
 }

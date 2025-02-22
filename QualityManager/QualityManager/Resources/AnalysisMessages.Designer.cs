@@ -22,14 +22,14 @@ namespace QualityManager.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ValidationMessages {
+    public class AnalysisMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ValidationMessages() {
+        internal AnalysisMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace QualityManager.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("QualityManager.Resources.ValidationMessages", typeof(ValidationMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("QualityManager.Resources.AnalysisMessages", typeof(AnalysisMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,92 @@ namespace QualityManager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analysis Type ID must be a valid positive number..
+        ///   Looks up a localized string similar to Chemical components are within acceptable limits..
         /// </summary>
-        public static string AnalysisTypeMaxValue {
+        public static string Chemical_inrange {
             get {
-                return ResourceManager.GetString("AnalysisTypeMaxValue", resourceCulture);
+                return ResourceManager.GetString("Chemical_inrange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analysis Type is required..
+        ///   Looks up a localized string similar to Chemical components are out of acceptable range..
         /// </summary>
-        public static string AnalysisTypeRequired {
+        public static string Chemical_outrange {
             get {
-                return ResourceManager.GetString("AnalysisTypeRequired", resourceCulture);
+                return ResourceManager.GetString("Chemical_outrange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Food name is required..
+        ///   Looks up a localized string similar to Processing complete:.
         /// </summary>
-        public static string FoodNameRequired {
+        public static string Completed {
             get {
-                return ResourceManager.GetString("FoodNameRequired", resourceCulture);
+                return ResourceManager.GetString("Completed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entity {0} with key {1} not found..
+        ///   Looks up a localized string similar to Microorganisms are within limits..
         /// </summary>
-        public static string NotFound {
+        public static string Microbiological_inrange {
             get {
-                return ResourceManager.GetString("NotFound", resourceCulture);
+                return ResourceManager.GetString("Microbiological_inrange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Serial number is required..
+        ///   Looks up a localized string similar to Microorganisms are beyond acceptable limits..
         /// </summary>
-        public static string SerialNumberRequired {
+        public static string Microbiological_outrange {
             get {
-                return ResourceManager.GetString("SerialNumberRequired", resourceCulture);
+                return ResourceManager.GetString("Microbiological_outrange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Serial number cannot exceed 32 characters..
+        ///   Looks up a localized string similar to Pending.
         /// </summary>
-        public static string SerialNumberTooLong {
+        public static string Peding {
             get {
-                return ResourceManager.GetString("SerialNumberTooLong", resourceCulture);
+                return ResourceManager.GetString("Peding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing.
+        /// </summary>
+        public static string Processing {
+            get {
+                return ResourceManager.GetString("Processing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensory properties meet the required standards..
+        /// </summary>
+        public static string Sensory_inrange {
+            get {
+                return ResourceManager.GetString("Sensory_inrange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensory properties do not meet the required standards..
+        /// </summary>
+        public static string Sensory_outrange {
+            get {
+                return ResourceManager.GetString("Sensory_outrange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown status.
+        /// </summary>
+        public static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
             }
         }
     }

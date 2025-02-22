@@ -1,9 +1,13 @@
+using AnalysisEngine.Services;
 using Microsoft.EntityFrameworkCore;
 using QualityManager.Data;
 using QualityManager.Mappings;
+using QualityManager.Middleware;
 using QualityManager.Repository;
 using QualityManager.Resources;
 using QualityManager.Services;
+using Shared.Configuration;
+using Shared.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +19,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers()
     .AddDataAnnotationsLocalization(opt =>
     {
-        opt.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ValidationMessages));
+        opt.DataAnnotationLocalizerProvider = (type, factory) =>
+        {
+            if (type == typeof(ValidationMessages))
+            {
+                return factory.Create(typeof(ValidationMessages));
+            }
+            else
+            {
+                return factory.Create(typeof(ValidationMessages));
+            }
+        };
     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -24,9 +38,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddLocalization();
 builder.Services.AddAutoMapper(typeof(FoodAnalysisProfile));
 
+builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMQ"));
+
+builder.Services.AddSingleton<RabbitMqConnection>();
+builder.Services.AddSingleton<AnalysisListener>();
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ITresholdRepository, TresholdRepository>();
 builder.Services.AddScoped<IFoodAnalysisRepository, FoodAnalysisRepository>();
 builder.Services.AddScoped<IFoodAnalysisService, FoodAnalysisService>();
+
+builder.Services.AddHostedService<RabbitMqListenerService>();
 
 builder.Logging.AddConsole();
 
@@ -53,6 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

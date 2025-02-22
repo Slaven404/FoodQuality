@@ -22,5 +22,7 @@ namespace QualityManager.Models
         public long ProcessStatusId { get; set; }
 
         public ProcessStatus ProcessStatus { get; set; } = null!;
+
+        public string? Result { get; set; }
     }
 }
