@@ -1,0 +1,92 @@
+version: '3.4'
+
+services:
+  qualitymanager:
+    build:
+      context: ./
+      dockerfile: QualityManager/Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - sqlserver
+      - rabbitmq  # Dodato za RabbitMQ
+    environment:
+      - RABBITMQ_HOST=rabbitmq  # Postavljanje RabbitMQ hosta za aplikaciju
+      - RABBITMQ_PORT=5672       # RabbitMQ port
+      - RABBITMQ_USERNAME=guest  # Korišćenje default korisnika
+      - RABBITMQ_PASSWORD=guest  # Default lozinka
+    networks:
+      - app-network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "1433"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "5672:5672"   # RabbitMQ osnovni port
+      - "15672:15672" # Web Management port (možeš da pristupiš RabbitMQ administraciji kroz ovaj port)
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest  # Default korisničko ime
+      - RABBITMQ_DEFAULT_PASS=guest  # Default lozinka
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+    networks:
+      - app-network
+  analysisengine:
+    build:
+      context: ./
+      dockerfile: AnalysisEngine/Dockerfile
+    ports:
+      - "6000:8080"  # Izloženi port za AnalysisEngine
+    depends_on:
+      - rabbitmq  # Dodato za RabbitMQ
+    environment:
+      - RABBITMQ_HOST=rabbitmq  # Postavljanje RabbitMQ hosta za aplikaciju
+      - RABBITMQ_PORT=5672      # RabbitMQ port
+      - RABBITMQ_USERNAME=guest # Korišćenje default korisnika
+      - RABBITMQ_PASSWORD=guest # Default lozinka
+    networks:
+      - app-network
+  qualitymanager.test:
+    build:
+      context: ./
+      dockerfile: QualityManager.Test/Dockerfile
+    depends_on:
+      - qualitymanager
+      - rabbitmq
+      - analysisengine
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+    working_dir: /src/QualityManager.Test
+    command: ["dotnet", "test", "--logger", "console"]
+    networks:
+      - app-network
+volumes:
+  sql_data:
+networks:
+  app-network:
+    driver: bridge
