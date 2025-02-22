@@ -18,19 +18,19 @@ namespace AnalysisEngine.Services
         {
             Console.WriteLine("Analysis Engine is starting...");
 
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    bool connected = await _rabbitMqConnection.InitializeConnectionAsync();
-            //    if (connected)
-            //    {
-            //        Console.WriteLine("RabbitMQ Listeneris starting...");
-            //        await _foodAnalysisListener.StartListeningAsync(stoppingToken);
-            //        break;
-            //    }
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                bool connected = await _rabbitMqConnection.InitializeConnectionAsync();
+                if (connected)
+                {
+                    Console.WriteLine("RabbitMQ Listeneris starting...");
+                    await _foodAnalysisListener.StartListeningAsync(stoppingToken);
+                    break;
+                }
 
-            //    Console.WriteLine("Failed to connect to RabbitMQ. Retrying in 10 seconds...");
-            //    await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
-            //}
+                Console.WriteLine("Failed to connect to RabbitMQ. Retrying in 10 seconds...");
+                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+            }
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
