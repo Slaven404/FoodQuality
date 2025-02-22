@@ -8,7 +8,7 @@ namespace AnalysisEngine.Services
     {
         public async Task<string> PerformAnalysisAsync(AnalysisRequestDto request)
         {
-            await Task.Delay(5000);
+            await Task.Delay(2000);
 
             return GenerateRandomDigitString((AnalysisTypeEnum)request.AnalysisTypeId);
         }
