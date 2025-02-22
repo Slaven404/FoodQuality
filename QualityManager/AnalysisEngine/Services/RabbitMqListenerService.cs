@@ -23,7 +23,7 @@ namespace AnalysisEngine.Services
                 bool connected = await _rabbitMqConnection.InitializeConnectionAsync();
                 if (connected)
                 {
-                    Console.WriteLine("RabbitMQ Listeneris starting...");
+                    Console.WriteLine("RabbitMQ Listener is starting...");
                     await _foodAnalysisListener.StartListeningAsync(stoppingToken);
                     break;
                 }

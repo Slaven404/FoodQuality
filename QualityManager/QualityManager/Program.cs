@@ -65,7 +65,7 @@ using (IServiceScope scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         ILogger<Program> logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Greška prilikom primene migracija baze podataka.");
+        logger.LogError(ex, "Error applying database migrations.");
     }
 }
 
@@ -83,5 +83,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/", () => Results.Content("<h1>Quality Manager API is running!</h1>", "text/html"));
 
 app.Run();

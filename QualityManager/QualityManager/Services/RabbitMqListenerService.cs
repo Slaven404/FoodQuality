@@ -16,14 +16,14 @@ namespace AnalysisEngine.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            Console.WriteLine("Analysis Engine is starting...");
+            Console.WriteLine("QualityManager is starting");
 
             while (!stoppingToken.IsCancellationRequested)
             {
                 bool connected = await _rabbitMqConnection.InitializeConnectionAsync();
                 if (connected)
                 {
-                    Console.WriteLine("RabbitMQ Listeneris starting...");
+                    Console.WriteLine("RabbitMQ Listener is starting...");
                     await _foodAnalysisListener.StartListeningAsync(stoppingToken);
                     break;
                 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure;
 using QualityManager.DTOs.Requests;
 using QualityManager.DTOs.Responses;
 using QualityManager.Exceptions;
