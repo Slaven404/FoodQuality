@@ -22,9 +22,9 @@ namespace QualityManager.Test.Tests
 
             isValid.Should().BeFalse();
             validationResults.Should().HaveCount(3);
-            validationResults.Should().Contain(x => x.ErrorMessage == nameof(ValidationMessages.FoodNameRequired));
-            validationResults.Should().Contain(x => x.ErrorMessage == nameof(ValidationMessages.SerialNumberTooLong));
-            validationResults.Should().Contain(x => x.ErrorMessage == nameof(ValidationMessages.AnalysisTypeMaxValue));
+            validationResults.Should().Contain(x => x.ErrorMessage == nameof(Translations.Validation_FoodNameRequired));
+            validationResults.Should().Contain(x => x.ErrorMessage == nameof(Translations.Validation_SerialNumberTooLong));
+            validationResults.Should().Contain(x => x.ErrorMessage == nameof(Translations.Validation_AnalysisTypeMaxValue));
         }
 
         [Fact]

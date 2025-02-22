@@ -26,26 +26,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\AnalysisMessages.Designer.cs">
+    <Compile Update="Resources\Translations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AnalysisMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\ValidationMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ValidationMessages.resx</DependentUpon>
+      <DependentUpon>Translations.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\AnalysisMessages.resx">
+    <EmbeddedResource Update="Resources\Translations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AnalysisMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ValidationMessages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValidationMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>Translations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

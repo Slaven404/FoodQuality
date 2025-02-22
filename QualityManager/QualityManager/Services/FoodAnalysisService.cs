@@ -36,14 +36,14 @@ namespace QualityManager.Services
             await _foodAnalysisListener.SendFoodBatchToRabbitMqAsync(analysisRequest, CancellationToken.None);
 
             analysis = await _foodAnalysisRepository.GetDetailsByIdAsync(analysis.Id)
-                             ?? throw new NotFoundException(string.Format(ValidationMessages.NotFound, nameof(FoodAnalysis), analysis.Id));
+                             ?? throw new NotFoundException(string.Format(Translations.Exception_NotFound, nameof(FoodAnalysis), analysis.Id));
             return _mapper.Map<FoodBatchDetailsResponse>(analysis);
         }
 
         public async Task UpdateFoodProcessStatus(FoodAnalysisProcessResponse response)
         {
             FoodAnalysis foodAnalysis = await _foodAnalysisRepository.FindBySerialNumberAsync(response.SerialNumber)
-                                              ?? throw new NotFoundException(string.Format(ValidationMessages.NotFound, nameof(FoodAnalysis), response.SerialNumber));
+                                              ?? throw new NotFoundException(string.Format(Translations.Exception_NotFound, nameof(FoodAnalysis), response.SerialNumber));
             if (string.IsNullOrEmpty(response.Result))
             {
                 foodAnalysis.ProcessStatusId = ProcessStatus.Processing.Id;
@@ -62,7 +62,7 @@ namespace QualityManager.Services
         public async Task<FoodProcessStatusDetailsResponse?> GetFoodAnalysisBySerialNumberAsync(string serialNumber)
         {
             FoodAnalysis foodAnalysis = await _foodAnalysisRepository.FindBySerialNumberAsync(serialNumber)
-                                              ?? throw new NotFoundException(string.Format(ValidationMessages.NotFound, nameof(FoodAnalysis), serialNumber));
+                                              ?? throw new NotFoundException(string.Format(Translations.Exception_NotFound, nameof(FoodAnalysis), serialNumber));
 
             FoodProcessStatusDetailsResponse details = _mapper.Map<FoodProcessStatusDetailsResponse>(foodAnalysis);
             details.AnalysisResult = await GenerateAnalysisResult(foodAnalysis.Result, foodAnalysis.AnalysisTypeId, foodAnalysis.ProcessStatusId);
@@ -72,26 +72,26 @@ namespace QualityManager.Services
         private async Task<string> GenerateAnalysisResult(string? result, long analysisTypeId, long processStatusId)
         {
             Treshold treshold = await _tresholdRepository.GetTresholdByAnalysisTypeIdAsync(analysisTypeId)
-                                      ?? throw new NotFoundException(string.Format(ValidationMessages.NotFound, nameof(Treshold), analysisTypeId)); ;
+                                      ?? throw new NotFoundException(string.Format(Translations.Exception_NotFound, nameof(Treshold), analysisTypeId)); ;
 
             string processStatusText = "";
 
             switch (processStatusId)
             {
                 case long _ when processStatusId == ProcessStatus.Pending.Id:
-                    processStatusText = AnalysisMessages.Peding;
+                    processStatusText = Translations.Peding;
                     break;
 
                 case long _ when processStatusId == ProcessStatus.Processing.Id:
-                    processStatusText = AnalysisMessages.Processing;
+                    processStatusText = Translations.Processing;
                     break;
 
                 case long _ when processStatusId == ProcessStatus.Completed.Id:
-                    processStatusText = AnalysisMessages.Completed;
+                    processStatusText = Translations.Completed;
                     break;
 
                 default:
-                    processStatusText = AnalysisMessages.Unknown;
+                    processStatusText = Translations.Unknown;
                     break;
             }
 
@@ -118,10 +118,10 @@ namespace QualityManager.Services
         {
             return analysisType switch
             {
-                AnalysisTypeEnum.Microbiological => AnalysisMessages.Microbiological_inrange,
-                AnalysisTypeEnum.Chemical => AnalysisMessages.Chemical_inrange,
-                AnalysisTypeEnum.Sensory => AnalysisMessages.Sensory_inrange,
-                _ => AnalysisMessages.Unknown,
+                AnalysisTypeEnum.Microbiological => Translations.Microbiological_inrange,
+                AnalysisTypeEnum.Chemical => Translations.Chemical_inrange,
+                AnalysisTypeEnum.Sensory => Translations.Sensory_inrange,
+                _ => Translations.Unknown,
             };
         }
 
@@ -129,10 +129,10 @@ namespace QualityManager.Services
         {
             return analysisType switch
             {
-                AnalysisTypeEnum.Microbiological => AnalysisMessages.Microbiological_outrange,
-                AnalysisTypeEnum.Chemical => AnalysisMessages.Chemical_outrange,
-                AnalysisTypeEnum.Sensory => AnalysisMessages.Sensory_outrange,
-                _ => AnalysisMessages.Unknown,
+                AnalysisTypeEnum.Microbiological => Translations.Microbiological_outrange,
+                AnalysisTypeEnum.Chemical => Translations.Chemical_outrange,
+                AnalysisTypeEnum.Sensory => Translations.Sensory_outrange,
+                _ => Translations.Unknown,
             };
         }
     }

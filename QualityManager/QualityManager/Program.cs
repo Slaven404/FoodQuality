@@ -19,17 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers()
     .AddDataAnnotationsLocalization(opt =>
     {
-        opt.DataAnnotationLocalizerProvider = (type, factory) =>
-        {
-            if (type == typeof(ValidationMessages))
-            {
-                return factory.Create(typeof(ValidationMessages));
-            }
-            else
-            {
-                return factory.Create(typeof(ValidationMessages));
-            }
-        };
+        opt.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(Translations));
     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

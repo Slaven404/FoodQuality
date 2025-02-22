@@ -22,14 +22,14 @@ namespace QualityManager.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AnalysisMessages {
+    public class Translations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AnalysisMessages() {
+        internal Translations() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace QualityManager.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("QualityManager.Resources.AnalysisMessages", typeof(AnalysisMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("QualityManager.Resources.Translations", typeof(Translations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -84,6 +84,15 @@ namespace QualityManager.Resources {
         public static string Completed {
             get {
                 return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity {0} with key {1} not found..
+        /// </summary>
+        public static string Exception_NotFound {
+            get {
+                return ResourceManager.GetString("Exception_NotFound", resourceCulture);
             }
         }
         
@@ -147,6 +156,51 @@ namespace QualityManager.Resources {
         public static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis Type ID must be a valid positive number..
+        /// </summary>
+        public static string Validation_AnalysisTypeMaxValue {
+            get {
+                return ResourceManager.GetString("Validation_AnalysisTypeMaxValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis Type is required..
+        /// </summary>
+        public static string Validation_AnalysisTypeRequired {
+            get {
+                return ResourceManager.GetString("Validation_AnalysisTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food name is required..
+        /// </summary>
+        public static string Validation_FoodNameRequired {
+            get {
+                return ResourceManager.GetString("Validation_FoodNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serial number is required..
+        /// </summary>
+        public static string Validation_SerialNumberRequired {
+            get {
+                return ResourceManager.GetString("Validation_SerialNumberRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serial number cannot exceed 32 characters..
+        /// </summary>
+        public static string Validation_SerialNumberTooLong {
+            get {
+                return ResourceManager.GetString("Validation_SerialNumberTooLong", resourceCulture);
             }
         }
     }

@@ -126,6 +126,9 @@
   <data name="Completed" xml:space="preserve">
     <value>Processing complete:</value>
   </data>
+  <data name="Exception_NotFound" xml:space="preserve">
+    <value>Entity {0} with key {1} not found.</value>
+  </data>
   <data name="Microbiological_inrange" xml:space="preserve">
     <value>Microorganisms are within limits.</value>
   </data>
@@ -146,5 +149,20 @@
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown status</value>
+  </data>
+  <data name="Validation_AnalysisTypeMaxValue" xml:space="preserve">
+    <value>Analysis Type ID must be a valid positive number.</value>
+  </data>
+  <data name="Validation_AnalysisTypeRequired" xml:space="preserve">
+    <value>Analysis Type is required.</value>
+  </data>
+  <data name="Validation_FoodNameRequired" xml:space="preserve">
+    <value>Food name is required.</value>
+  </data>
+  <data name="Validation_SerialNumberRequired" xml:space="preserve">
+    <value>Serial number is required.</value>
+  </data>
+  <data name="Validation_SerialNumberTooLong" xml:space="preserve">
+    <value>Serial number cannot exceed 32 characters.</value>
   </data>
 </root>
